@@ -71,41 +71,4 @@ public class AmazonS3Manager {
         s3.setRegion(usEast);
         return s3;
     }
-    
-    public static void main(String[] args) throws Exception {
-        //File file = new File("C:\\Users\\Samuel\\.aws/folder.zip");
-        //AmazonS3Manager.putS3Object("folder.zip", file);
-        
-        List<MyFile> list = AmazonS3Manager.listS3Objects();
-        for (int i = 0; i < list.size(); i++) {
-            MyFile f = list.get(i);
-            System.out.println(f.getName());
-            if (f.isDirectory()) {
-                List<MyFile> children = f.getChildren();
-                for (int j = 0; j < children.size(); j++) {
-                    MyFile c = children.get(j);
-                    System.out.println("   "+c.getName());
-                    if (c.isDirectory()) {
-                        List<MyFile> grand = c.getChildren();
-                        for (int k = 0; k < grand.size(); k++) {
-                            MyFile g = grand.get(k);
-                            System.out.println("      "+g.getName());
-                        }
-                    }
-                }
-            }
-        }
-        /*
-        ZipFile zipFile = new ZipFile(file);
-        Enumeration<? extends ZipEntry> entries = zipFile.entries();
-
-        while(entries.hasMoreElements()){
-            ZipEntry entry = entries.nextElement();
-            //InputStream stream = zipFile.getInputStream(entry);
-            System.out.println(entry.isDirectory()?"->":""+entry.getName());
-            //files.add(entry.getName());
-        }*/
-        
-        //AmazonS3Manager.getS3Object("folder.zip");
-    }
 }
